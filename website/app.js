@@ -13,12 +13,10 @@ document.getElementById('generate').addEventListener('click', performAction);
 
     getWeather(baseURL, zip, apiKeyURL).then(function(data){
       let temp = data.main.temp;
-      postData('/add', {temp:temp, feeling:feeling, date:newDate})
-     })
-     .then(
-      retrieveData()
-      );
-
+      return postData('/add', {temp:temp, feeling:feeling, date:newDate}).then(() => {
+        retrieveData();
+      })
+     });
 }
 
 const getWeather = async (baseURL, zip, key)=>{
